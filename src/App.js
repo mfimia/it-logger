@@ -1,14 +1,18 @@
-import { useEffect } from "react";
-import "materialize-css/dist/css/materialize.min.css";
-import M from "materialize-css/dist/js/materialize.min";
+import { Fragment } from "react";
 import "./App.css";
+import Logs from "./components/layout/logs/Logs";
+import SearchBar from "./components/layout/SearchBar";
+import { Box } from "@mui/system";
 
 const App = () => {
-  useEffect(() => {
-    // Initialize Materialize JS
-    M.AutoInit();
-  });
-  return <div className="App">Hello World</div>;
+  return (
+    <Fragment>
+      <SearchBar />
+      <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
+        <Logs />
+      </Box>
+    </Fragment>
+  );
 };
 
 export default App;
