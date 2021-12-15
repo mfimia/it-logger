@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import List from "@mui/material/List";
 import LogItem from "./LogItem";
-import CircularIndeterminate from "../CircularIndeterminate";
+import CircularIndeterminate from "../layout/CircularIndeterminate";
 
 const Logs = () => {
   const [logs, setLogs] = useState([]);
