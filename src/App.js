@@ -8,7 +8,7 @@ const App = () => {
   return (
     <Fragment>
       <SearchBar />
-      <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
+      <Box sx={{ flexGrow: 1, maxWidth: 600 }}>
         <Logs />
       </Box>
     </Fragment>

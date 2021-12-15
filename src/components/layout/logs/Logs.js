@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
-import Avatar from "@mui/material/Avatar";
-import FolderIcon from "@mui/icons-material/Folder";
+import LogItem from "./LogItem";
+import CircularIndeterminate from "../CircularIndeterminate";
 
 const Logs = () => {
   const [logs, setLogs] = useState([]);
@@ -25,26 +22,14 @@ const Logs = () => {
   };
 
   if (loading) {
-    return <h4>Loading...</h4>;
+    return <CircularIndeterminate />;
   }
   return (
     <List>
       {!loading && logs.length === 0 ? (
         <p>No logs to show...</p>
       ) : (
-        logs.map((log) => (
-          <ListItem key={log.id}>
-            <ListItemAvatar>
-              <Avatar>
-                <FolderIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary={log.message}
-              secondary={`${log.tech} | ${log.date}`}
-            />
-          </ListItem>
-        ))
+        logs.map((log) => <LogItem key={log.id} log={log} />)
       )}
     </List>
   );
