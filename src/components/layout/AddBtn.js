@@ -4,9 +4,8 @@ import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import PersonIcon from "@mui/icons-material/Person";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import AddLogModal from "../logs/AddLogModal";
+import AddLogModal from "../modals/AddLogModal";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import { Link } from "react-router-dom";
 
 export default function BasicSpeedDial() {
   const [open, setOpen] = useState(false);
