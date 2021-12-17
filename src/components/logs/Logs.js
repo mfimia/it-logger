@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import List from "@mui/material/List";
 import LogItem from "./LogItem";
 import CircularIndeterminate from "../layout/CircularIndeterminate";
@@ -32,6 +32,7 @@ const Logs = ({ log, getLogs }) => {
 
 Logs.propTypes = {
   log: PropTypes.object.isRequired,
+  getLogs: PropTypes.func.isRequired,
 };
 
 // We bring the whole state here from redux

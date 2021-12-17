@@ -1,4 +1,7 @@
 import { useState, Fragment } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { addLog } from "../../../actions/logActions";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -39,14 +42,24 @@ const techs = [
   },
 ];
 
-const AddLogModal = ({ setAddModal, addModal }) => {
+const AddLogModal = ({ setAddModal, addModal, addLog }) => {
   const [message, setMessage] = useState("");
   const [attention, setAttention] = useState(false);
   const [tech, setTech] = useState("");
 
-  const [toast, setToast] = useState(false);
-  const closeToast = () => setToast(false);
-  const openToast = () => setToast(true);
+  const [toast, setToast] = useState({
+    open: false,
+    type: null,
+  });
+
+  const closeToast = () =>
+    setToast((prev) => {
+      return {
+        ...prev,
+        open: false,
+      };
+    });
+  const openToast = (type) => setToast({ open: true, type: type });
 
   const handleClose = () => setAddModal(false);
   const handleChange = (e) => {
@@ -61,15 +74,24 @@ const AddLogModal = ({ setAddModal, addModal }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (message === "" || tech === "") {
-      openToast();
+      openToast("error");
     } else {
-      console.log(message, tech, attention);
-    }
+      const newLog = {
+        message,
+        attention,
+        tech,
+        date: new Date(),
+      };
 
-    // Clear fields
-    setMessage("");
-    setAttention(false);
-    setTech("");
+      // Add log and display toast
+      addLog(newLog);
+      openToast("success");
+
+      // Clear fields
+      setMessage("");
+      setAttention(false);
+      setTech("");
+    }
   };
 
   return (
@@ -146,16 +168,24 @@ const AddLogModal = ({ setAddModal, addModal }) => {
       </Modal>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={toast}
+        open={toast.open}
         autoHideDuration={6000}
         onClose={closeToast}
       >
-        <Alert onClose={closeToast} severity="error" sx={{ width: "100%" }}>
-          Please fill all fields!
+        <Alert
+          onClose={closeToast}
+          severity={toast.type}
+          sx={{ width: "100%" }}
+        >
+          {toast.type === "success" ? "Log added" : "Please fill all fields!"}
         </Alert>
       </Snackbar>
     </Fragment>
   );
 };
 
-export default AddLogModal;
+AddLogModal.propTypes = {
+  addLog: PropTypes.func.isRequired,
+};
+
+export default connect(null, { addLog })(AddLogModal);
