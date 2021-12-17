@@ -7,6 +7,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import AddLogModal from "../modals/logs/AddLogModal";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import AddTechModal from "../modals/techs/AddTechModal";
+import TechListModal from "../modals/techs/TechListModal";
 
 export default function BasicSpeedDial() {
   const [open, setOpen] = useState(false);
@@ -21,7 +22,7 @@ export default function BasicSpeedDial() {
     {
       icon: <PersonIcon color="primary" />,
       name: "Techs",
-      click: () => console.log("hi people"),
+      click: () => setTechs(true),
     },
     {
       icon: <PersonAddIcon color="success" />,
@@ -59,6 +60,7 @@ export default function BasicSpeedDial() {
         <AddLogModal addModal={addModal} setAddModal={setAddModal} />
       )}
       {addTech && <AddTechModal addTech={addTech} setAddTech={setAddTech} />}
+      {techs && <TechListModal techs={techs} setTechs={setTechs} />}
     </Fragment>
   );
 }
