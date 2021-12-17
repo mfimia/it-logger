@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import SendIcon from "@mui/icons-material/Send";
+import { Button } from "@mui/material";
+import Snackbar from "@mui/material/Snackbar";
+import { Alert } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -41,6 +44,10 @@ const AddLogModal = ({ setAddModal, addModal }) => {
   const [attention, setAttention] = useState(false);
   const [tech, setTech] = useState("");
 
+  const [toast, setToast] = useState(false);
+  const closeToast = () => setToast(false);
+  const openToast = () => setToast(true);
+
   const handleClose = () => setAddModal(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,71 +58,98 @@ const AddLogModal = ({ setAddModal, addModal }) => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (message === "" || tech === "") {
+      openToast();
+    } else {
+      console.log(message, tech, attention);
+    }
+  };
+
   return (
-    <Modal
-      open={addModal}
-      onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box sx={style}>
-        <Typography
-          align="center"
-          id="modal-modal-title"
-          variant="h4"
-          component="h4"
-        >
-          Enter system log
-        </Typography>
-        <Box
-          component="form"
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "space-evenly",
-          }}
-        >
-          <Box sx={{ display: "flex", alignItems: "center", mb: 8 }}>
-            <AccountCircle
-              sx={{ color: "action.active", mr: 2, my: 0.5, pt: 3 }}
-            />
-            <TextField
-              onChange={handleChange}
-              label="Log message"
-              variant="standard"
-              name="message"
-              value={message}
-            />
-          </Box>
-          <TextField
-            select
-            label="Select tech"
-            name="tech"
-            size="small"
-            value={tech}
-            onChange={handleChange}
-            sx={{ width: 200 }}
+    <Fragment>
+      <Modal
+        open={addModal}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography
+            align="center"
+            id="modal-modal-title"
+            variant="h4"
+            component="h4"
           >
-            {techs.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.value}
-              </MenuItem>
-            ))}
-          </TextField>
-          <FormControlLabel
-            label="Needs attention"
-            control={
-              <Checkbox
-                name="attention"
-                checked={attention}
-                onChange={handleChange}
+            Enter system log
+          </Typography>
+          <Box
+            component="form"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+            }}
+            onSubmit={handleSubmit}
+          >
+            <Box sx={{ display: "flex", alignItems: "center", mb: 8 }}>
+              <SendIcon
+                sx={{ color: "action.active", mr: 2, my: 0.5, pt: 3 }}
               />
-            }
-          />
+              <TextField
+                onChange={handleChange}
+                label="Log message"
+                variant="standard"
+                name="message"
+                value={message}
+                required
+              />
+            </Box>
+            <TextField
+              select
+              label="Select tech"
+              name="tech"
+              size="small"
+              value={tech}
+              onChange={handleChange}
+              sx={{ width: 200 }}
+              required
+            >
+              {techs.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.value}
+                </MenuItem>
+              ))}
+            </TextField>
+            <FormControlLabel
+              label="Needs attention"
+              control={
+                <Checkbox
+                  name="attention"
+                  checked={attention}
+                  onChange={handleChange}
+                />
+              }
+            />
+            <Button onClick={handleSubmit} variant="contained">
+              Submit
+            </Button>
+          </Box>
         </Box>
-      </Box>
-    </Modal>
+      </Modal>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={toast}
+        autoHideDuration={6000}
+        onClose={closeToast}
+      >
+        <Alert onClose={closeToast} severity="error" sx={{ width: "100%" }}>
+          Please fill all fields!
+        </Alert>
+      </Snackbar>
+    </Fragment>
   );
 };
 
