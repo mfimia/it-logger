@@ -2,26 +2,21 @@ import React, { useState, useEffect } from "react";
 import List from "@mui/material/List";
 import LogItem from "./LogItem";
 import CircularIndeterminate from "../layout/CircularIndeterminate";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getLogs } from "../../actions/logActions";
 
-const Logs = () => {
-  const [logs, setLogs] = useState([]);
-  const [loading, setLoading] = useState(false);
+// We destructure the props coming from redux (declared at the end of the component)
+const Logs = ({ log, getLogs }) => {
+  // We just take the logs and loading properties
+  const { logs, loading } = log;
 
   useEffect(() => {
     getLogs();
     // eslint-disble-next-line
   }, []);
 
-  const getLogs = async () => {
-    setLoading(true);
-    const res = await fetch("/logs");
-    const data = await res.json();
-
-    setLogs(data);
-    setLoading(false);
-  };
-
-  if (loading) {
+  if (loading || logs === null) {
     return <CircularIndeterminate />;
   }
   return (
@@ -35,4 +30,14 @@ const Logs = () => {
   );
 };
 
-export default Logs;
+Logs.propTypes = {
+  log: PropTypes.object.isRequired,
+};
+
+// We bring the whole state here from redux
+const mapStateToProps = (state) => ({
+  log: state.log,
+});
+
+// We connect the state and actions with the component
+export default connect(mapStateToProps, { getLogs })(Logs);
