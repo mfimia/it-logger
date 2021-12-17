@@ -4,16 +4,20 @@ import Logs from "./components/logs/Logs";
 import SearchBar from "./components/layout/SearchBar";
 import { Box } from "@mui/system";
 import AddBtn from "./components/layout/AddBtn";
+import { Provider } from "react-redux";
+import store from "./store";
 
 const App = () => {
   return (
-    <Fragment>
-      <SearchBar />
-      <Box sx={{ flexGrow: 1, maxWidth: 600 }}>
-        <Logs />
-      </Box>
-      <AddBtn />
-    </Fragment>
+    <Provider store={store}>
+      <Fragment>
+        <SearchBar />
+        <Box sx={{ flexGrow: 1, maxWidth: 600 }}>
+          <Logs />
+        </Box>
+        <AddBtn />
+      </Fragment>
+    </Provider>
   );
 };
 
