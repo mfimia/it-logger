@@ -65,6 +65,11 @@ const AddLogModal = ({ setAddModal, addModal }) => {
     } else {
       console.log(message, tech, attention);
     }
+
+    // Clear fields
+    setMessage("");
+    setAttention(false);
+    setTech("");
   };
 
   return (

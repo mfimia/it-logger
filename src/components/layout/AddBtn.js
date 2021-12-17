@@ -4,12 +4,14 @@ import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import PersonIcon from "@mui/icons-material/Person";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import AddLogModal from "../modals/AddLogModal";
+import AddLogModal from "../modals/logs/AddLogModal";
 import AddBoxIcon from "@mui/icons-material/AddBox";
+import AddTechModal from "../modals/techs/AddTechModal";
 
 export default function BasicSpeedDial() {
   const [open, setOpen] = useState(false);
   const [addModal, setAddModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
   const [techs, setTechs] = useState(false);
   const [addTech, setAddTech] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -24,7 +26,7 @@ export default function BasicSpeedDial() {
     {
       icon: <PersonAddIcon color="success" />,
       name: "Add Tech",
-      click: () => console.log("hi add"),
+      click: () => setAddTech(true),
     },
     {
       icon: <AddBoxIcon color="secondary" />,
@@ -56,6 +58,7 @@ export default function BasicSpeedDial() {
       {addModal && (
         <AddLogModal addModal={addModal} setAddModal={setAddModal} />
       )}
+      {addTech && <AddTechModal addTech={addTech} setAddTech={setAddTech} />}
     </Fragment>
   );
 }

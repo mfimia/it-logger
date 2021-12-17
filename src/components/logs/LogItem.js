@@ -6,37 +6,40 @@ import Avatar from "@mui/material/Avatar";
 import FolderIcon from "@mui/icons-material/Folder";
 import { Link, Typography, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Fragment } from "react";
 
 const LogItem = ({ log }) => {
   const { message, tech, date, attention, id } = log;
   return (
-    <ListItem>
-      <ListItemAvatar>
-        <Avatar>
-          <FolderIcon />
-        </Avatar>
-      </ListItemAvatar>
-      <ListItemText
-        primary={
-          <Link underline="none" href="#edit-log-modal">
-            <Typography
-              color={attention ? "error" : "primary"}
-              component="span"
-            >
-              {message}
+    <Fragment>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <FolderIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          primary={
+            <Link underline="none" href="#edit-log-modal">
+              <Typography
+                color={attention ? "error" : "primary"}
+                component="span"
+              >
+                {message}
+              </Typography>
+            </Link>
+          }
+          secondary={
+            <Typography sx={{ fontSize: 14 }} color="text.secondary">
+              ID #{id} last updated by {tech} on {date}
             </Typography>
-          </Link>
-        }
-        secondary={
-          <Typography sx={{ fontSize: 14 }} color="text.secondary">
-            ID #{id} last updated by {tech} on {date}
-          </Typography>
-        }
-      />
-      <IconButton aria-label="delete">
-        <DeleteIcon />
-      </IconButton>
-    </ListItem>
+          }
+        />
+        <IconButton aria-label="delete">
+          <DeleteIcon />
+        </IconButton>
+      </ListItem>
+    </Fragment>
   );
 };
 
