@@ -12,7 +12,7 @@ const App = () => {
     <Provider store={store}>
       <Fragment>
         <SearchBar />
-        <Box sx={{ flexGrow: 1, maxWidth: 600 }}>
+        <Box sx={{ flexGrow: 1, mt: 2 }}>
           <Logs />
         </Box>
         <AddBtn />

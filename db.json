@@ -1,20 +1,5 @@
 {
-  "logs": [
-    {
-      "message": "adding a log",
-      "attention": true,
-      "tech": "Chul",
-      "date": "2021-12-18T10:42:44.478Z",
-      "id": 1
-    },
-    {
-      "message": "adding a log",
-      "attention": false,
-      "tech": "Chul",
-      "date": "2021-12-18T10:42:54.092Z",
-      "id": 2
-    }
-  ],
+  "logs": [],
   "techs": [
     {
       "id": 1,

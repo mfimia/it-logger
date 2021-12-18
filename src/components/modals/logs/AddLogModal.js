@@ -1,4 +1,5 @@
 import { useState, Fragment } from "react";
+// We gonna use redux, so we need to import connnect
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 // Importing action from redux
@@ -54,13 +55,14 @@ const AddLogModal = ({ setAddModal, addModal, addLog }) => {
     type: null,
   });
 
-  const closeToast = () =>
+  const closeToast = () => {
     setToast((prev) => {
       return {
         ...prev,
         open: false,
       };
     });
+  };
   const openToast = (type) => setToast({ open: true, type: type });
 
   const handleClose = () => setAddModal(false);
