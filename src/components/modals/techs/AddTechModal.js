@@ -20,21 +20,6 @@ const style = {
   p: 4,
 };
 
-const techs = [
-  {
-    value: "Perro",
-  },
-  {
-    value: "Chul",
-  },
-  {
-    value: "Compi",
-  },
-  {
-    value: "Bro",
-  },
-];
-
 const AddTechModal = ({ setAddTech, addTech }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

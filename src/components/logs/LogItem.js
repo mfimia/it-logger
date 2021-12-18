@@ -33,7 +33,6 @@ const LogItem = ({ log, deleteLog, setCurrent }) => {
   };
 
   const closeToast = () => {
-    console.log("close function called");
     setToast((prev) => {
       return {
         ...prev,

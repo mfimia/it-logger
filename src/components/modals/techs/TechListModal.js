@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getTechs } from "../../../actions/techActions";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -18,29 +21,18 @@ const style = {
   p: 4,
 };
 
-const TechListModal = ({ techs, setTechs }) => {
-  const [loading, setLoading] = useState(false);
-  const [techItems, setTechItems] = useState([]);
-
+const TechListModal = ({ techModal, setTechModal, getTechs, tech }) => {
+  const { techs, loading } = tech;
   useEffect(() => {
     getTechs();
     // eslint-disble-next-line
   }, []);
 
-  const handleClose = () => setTechs(false);
-
-  const getTechs = async () => {
-    setLoading(true);
-    const res = await fetch("/techs");
-    const data = await res.json();
-
-    setTechItems(data);
-    setLoading(false);
-  };
+  const handleClose = () => setTechModal(false);
 
   return (
     <Modal
-      open={techs}
+      open={techModal}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
@@ -56,11 +48,21 @@ const TechListModal = ({ techs, setTechs }) => {
         </Typography>
         <List>
           {!loading &&
-            techItems.map((tech) => <TechItem key={tech.id} tech={tech} />)}
+            techs !== null &&
+            techs.map((tech) => <TechItem key={tech.id} tech={tech} />)}
         </List>
       </Box>
     </Modal>
   );
 };
 
-export default TechListModal;
+TechListModal.propTypes = {
+  tech: PropTypes.object.isRequired,
+  getTechs: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  tech: state.tech,
+});
+
+export default connect(mapStateToProps, { getTechs })(TechListModal);

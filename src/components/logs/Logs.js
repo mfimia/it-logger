@@ -16,7 +16,7 @@ const Logs = ({ log, getLogs }) => {
 
   useEffect(() => {
     getLogs();
-    // eslint-disble-next-line
+    // eslint-disable-next-line
   }, []);
 
   if (loading || logs === null) {
@@ -39,6 +39,9 @@ const Logs = ({ log, getLogs }) => {
             <Skeleton sx={{ my: 1 }} />
             <Skeleton sx={{ my: 1 }} animation="wave" />
             <Skeleton sx={{ my: 1 }} animation={false} />
+            <Skeleton sx={{ my: 1 }} animation={false} />
+            <Skeleton sx={{ my: 1 }} animation="wave" />
+            <Skeleton sx={{ my: 1 }} />
           </Box>
         </Fragment>
       ) : (

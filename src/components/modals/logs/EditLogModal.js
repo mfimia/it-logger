@@ -29,16 +29,16 @@ const style = {
 
 const techs = [
   {
-    value: "Perro",
+    value: "Tech 1",
   },
   {
-    value: "Chul",
+    value: "Tech 2",
   },
   {
-    value: "Compi",
+    value: "Tech 3",
   },
   {
-    value: "Bro",
+    value: "Tech 4",
   },
 ];
 

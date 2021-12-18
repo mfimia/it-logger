@@ -1,39 +1,24 @@
 {
-  "logs": [
-    {
-      "id": 1,
-      "message": "SOMETHING",
-      "attention": true,
-      "tech": "Compi",
-      "date": "2021-12-18T13:02:19.966Z"
-    },
-    {
-      "message": "whaetever",
-      "attention": false,
-      "tech": "Perro",
-      "date": "2021-12-18T13:43:08.954Z",
-      "id": 2
-    }
-  ],
+  "logs": [],
   "techs": [
     {
       "id": 1,
-      "firstName": "Chulo",
-      "lastName": "Chul"
+      "firstName": "Tech 1",
+      "lastName": "lastName"
     },
     {
       "id": 2,
-      "firstName": "Perro",
-      "lastName": "Dog"
+      "firstName": "Tech 2",
+      "lastName": "lastName"
     },
     {
       "id": 3,
-      "firstName": "Compi",
-      "lastName": "Comps"
+      "firstName": "Tech 3",
+      "lastName": "lastName"
     },
     {
-      "firstName": "Hermano",
-      "lastName": "Bro",
+      "firstName": "Tech 4",
+      "lastName": "lastName",
       "id": 4
     }
   ]
