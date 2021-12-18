@@ -1,46 +1,18 @@
 {
   "logs": [
     {
-      "id": 1,
-      "message": "Changed hard drive on workstation 005",
+      "message": "adding a log",
+      "attention": true,
+      "tech": "Chul",
+      "date": "2021-12-18T10:42:44.478Z",
+      "id": 1
+    },
+    {
+      "message": "adding a log",
       "attention": false,
-      "date": "03-02-2019",
-      "tech": "Perro Dog"
-    },
-    {
-      "id": 2,
-      "message": "Workstation 007 not posting",
-      "attention": true,
-      "date": "03-02-2019",
-      "tech": "Chulo Chul"
-    },
-    {
-      "id": 3,
-      "message": "Changed memory on workstation 050",
-      "attention": false,
-      "date": "03-02-2019",
-      "tech": "Compi Comps"
-    },
-    {
-      "message": "something",
-      "attention": true,
       "tech": "Chul",
-      "date": "2021-12-17T20:11:46.539Z",
-      "id": 4
-    },
-    {
-      "message": "something",
-      "attention": true,
-      "tech": "Chul",
-      "date": "2021-12-17T20:12:23.497Z",
-      "id": 5
-    },
-    {
-      "message": "log",
-      "attention": true,
-      "tech": "Chul",
-      "date": "2021-12-17T20:20:28.918Z",
-      "id": 6
+      "date": "2021-12-18T10:42:54.092Z",
+      "id": 2
     }
   ],
   "techs": [

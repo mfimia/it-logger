@@ -1,6 +1,7 @@
 import { useState, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+// Importing action from redux
 import { addLog } from "../../../actions/logActions";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -43,6 +44,7 @@ const techs = [
 ];
 
 const AddLogModal = ({ setAddModal, addModal, addLog }) => {
+  // It's a form, so we will have always our component-level state
   const [message, setMessage] = useState("");
   const [attention, setAttention] = useState(false);
   const [tech, setTech] = useState("");
@@ -188,4 +190,5 @@ AddLogModal.propTypes = {
   addLog: PropTypes.func.isRequired,
 };
 
+// We are not adding state, jsut an action. So we just call null first and then the action
 export default connect(null, { addLog })(AddLogModal);
