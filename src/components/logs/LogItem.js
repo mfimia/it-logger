@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { deleteLog } from "../../actions/logActions";
+import { deleteLog, setCurrent } from "../../actions/logActions";
 import PropTypes from "prop-types";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -10,8 +10,9 @@ import { Link, Typography, IconButton, Alert } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Fragment, useState } from "react";
 import Snackbar from "@mui/material/Snackbar";
+import EditLogModal from "../modals/logs/EditLogModal";
 
-const LogItem = ({ log, deleteLog }) => {
+const LogItem = ({ log, deleteLog, setCurrent }) => {
   const { message, tech, date, attention, id } = log;
 
   const [toast, setToast] = useState({
@@ -19,9 +20,16 @@ const LogItem = ({ log, deleteLog }) => {
     type: null,
   });
 
+  const [editModal, setEditModal] = useState(false);
+
   const handleDelete = () => {
     deleteLog(id);
     openToast("success");
+  };
+
+  const handleClick = () => {
+    setCurrent(log);
+    setEditModal(true);
   };
 
   const closeToast = () => {
@@ -45,7 +53,7 @@ const LogItem = ({ log, deleteLog }) => {
         </ListItemAvatar>
         <ListItemText
           primary={
-            <Link underline="none" href="#edit-log-modal">
+            <Link underline="none" onClick={handleClick} href="#edit-log-modal">
               <Typography
                 color={attention ? "error" : "primary"}
                 component="span"
@@ -79,6 +87,9 @@ const LogItem = ({ log, deleteLog }) => {
           Log deleted
         </Alert>
       </Snackbar>
+      {editModal && (
+        <EditLogModal editModal={editModal} setEditModal={setEditModal} />
+      )}
     </Fragment>
   );
 };
@@ -86,6 +97,7 @@ const LogItem = ({ log, deleteLog }) => {
 LogItem.propTypes = {
   log: PropTypes.object.isRequired,
   deleteLog: PropTypes.func.isRequired,
+  setCurrent: PropTypes.func.isRequired,
 };
 
-export default connect(null, { deleteLog })(LogItem);
+export default connect(null, { deleteLog, setCurrent })(LogItem);

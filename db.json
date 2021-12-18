@@ -1,5 +1,13 @@
 {
-  "logs": [],
+  "logs": [
+    {
+      "id": 1,
+      "message": "SOMETHING",
+      "attention": true,
+      "tech": "Compi",
+      "date": "2021-12-18T13:02:19.966Z"
+    }
+  ],
   "techs": [
     {
       "id": 1,

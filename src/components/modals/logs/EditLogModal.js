@@ -1,4 +1,7 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { updateLog } from "../../../actions/logActions";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -39,16 +42,37 @@ const techs = [
   },
 ];
 
-const EditLogModal = ({ setEditModal, editModal }) => {
+const EditLogModal = ({ setEditModal, editModal, updateLog, current }) => {
   const [message, setMessage] = useState("");
   const [attention, setAttention] = useState(false);
   const [tech, setTech] = useState("");
 
-  const [toast, setToast] = useState(false);
-  const closeToast = () => setToast(false);
-  const openToast = () => setToast(true);
+  useEffect(() => {
+    if (current) {
+      setMessage(current.message);
+      setAttention(current.attention);
+      setTech(current.tech);
+    }
+    // eslint-disable-next-line
+  }, []);
+
+  const [toast, setToast] = useState({
+    open: false,
+    type: null,
+  });
+
+  const closeToast = () => {
+    setToast((prev) => {
+      return {
+        ...prev,
+        open: false,
+      };
+    });
+  };
+  const openToast = (type) => setToast({ open: true, type: type });
 
   const handleClose = () => setEditModal(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "attention") {
@@ -61,9 +85,17 @@ const EditLogModal = ({ setEditModal, editModal }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (message === "" || tech === "") {
-      openToast();
+      openToast("error");
     } else {
-      console.log(message, tech, attention);
+      const updLog = {
+        id: current.id,
+        message,
+        attention,
+        tech,
+        date: new Date(),
+      };
+      updateLog(updLog);
+      openToast("success");
     }
 
     // Clear fields
@@ -146,16 +178,29 @@ const EditLogModal = ({ setEditModal, editModal }) => {
       </Modal>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={toast}
+        open={toast.open}
         autoHideDuration={6000}
         onClose={closeToast}
       >
-        <Alert onClose={closeToast} severity="error" sx={{ width: "100%" }}>
-          Please fill all fields!
+        <Alert
+          onClose={closeToast}
+          severity={toast.type}
+          sx={{ width: "100%" }}
+        >
+          {toast.type === "success" ? "Log updated" : "Please fill all fields!"}
         </Alert>
       </Snackbar>
     </Fragment>
   );
 };
 
-export default EditLogModal;
+EditLogModal.propTypes = {
+  current: PropTypes.object,
+  updateLog: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  current: state.log.current,
+});
+
+export default connect(mapStateToProps, { updateLog })(EditLogModal);

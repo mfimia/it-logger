@@ -11,10 +11,11 @@ import TechListModal from "../modals/techs/TechListModal";
 
 export default function BasicSpeedDial() {
   const [open, setOpen] = useState(false);
+
   const [addModal, setAddModal] = useState(false);
-  const [editModal, setEditModal] = useState(false);
   const [techs, setTechs] = useState(false);
   const [addTech, setAddTech] = useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
