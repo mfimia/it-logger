@@ -6,13 +6,13 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import SendIcon from "@mui/icons-material/Send";
 import { Button } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import { Alert } from "@mui/material";
+import TechSelectOptions from "../techs/TechSelectOptions";
 
 const style = {
   position: "absolute",
@@ -27,31 +27,16 @@ const style = {
   p: 4,
 };
 
-const techs = [
-  {
-    value: "Tech 1",
-  },
-  {
-    value: "Tech 2",
-  },
-  {
-    value: "Tech 3",
-  },
-  {
-    value: "Tech 4",
-  },
-];
-
 const EditLogModal = ({ setEditModal, editModal, updateLog, current }) => {
   const [message, setMessage] = useState("");
   const [attention, setAttention] = useState(false);
-  const [tech, setTech] = useState("");
+  const [techSelected, setTechSelected] = useState("");
 
   useEffect(() => {
     if (current) {
       setMessage(current.message);
       setAttention(current.attention);
-      setTech(current.tech);
+      setTechSelected(current.techSelected);
     }
     // eslint-disable-next-line
   }, []);
@@ -78,20 +63,20 @@ const EditLogModal = ({ setEditModal, editModal, updateLog, current }) => {
     if (name === "attention") {
       setAttention((prev) => !prev);
     } else {
-      name === "message" ? setMessage(value) : setTech(value);
+      name === "message" ? setMessage(value) : setTechSelected(value);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (message === "" || tech === "") {
+    if (message === "" || techSelected === "") {
       openToast("error");
     } else {
       const updLog = {
         id: current.id,
         message,
         attention,
-        tech,
+        techSelected,
         date: new Date(),
       };
       updateLog(updLog);
@@ -101,7 +86,7 @@ const EditLogModal = ({ setEditModal, editModal, updateLog, current }) => {
     // Clear fields
     setMessage("");
     setAttention(false);
-    setTech("");
+    setTechSelected("");
   };
 
   return (
@@ -144,22 +129,10 @@ const EditLogModal = ({ setEditModal, editModal, updateLog, current }) => {
                 required
               />
             </Box>
-            <TextField
-              select
-              label="Select tech"
-              name="tech"
-              size="small"
-              value={tech}
-              onChange={handleChange}
-              sx={{ width: 200 }}
-              required
-            >
-              {techs.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.value}
-                </MenuItem>
-              ))}
-            </TextField>
+            <TechSelectOptions
+              techSelected={techSelected}
+              handleChange={handleChange}
+            />
             <FormControlLabel
               label="Needs attention"
               control={

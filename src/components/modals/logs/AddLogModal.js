@@ -1,4 +1,5 @@
 import { useState, Fragment } from "react";
+import TechSelectOptions from "../techs/TechSelectOptions";
 // We gonna use redux, so we need to import connnect
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -8,7 +9,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import SendIcon from "@mui/icons-material/Send";
@@ -29,26 +29,11 @@ const style = {
   p: 4,
 };
 
-const techs = [
-  {
-    value: "Tech 1",
-  },
-  {
-    value: "Tech 2",
-  },
-  {
-    value: "Tech 3",
-  },
-  {
-    value: "Tech 4",
-  },
-];
-
 const AddLogModal = ({ setAddModal, addModal, addLog }) => {
   // It's a form, so we will have always our component-level state
   const [message, setMessage] = useState("");
   const [attention, setAttention] = useState(false);
-  const [tech, setTech] = useState("");
+  const [techSelected, setTechSelected] = useState("");
 
   const [toast, setToast] = useState({
     open: false,
@@ -66,24 +51,25 @@ const AddLogModal = ({ setAddModal, addModal, addLog }) => {
   const openToast = (type) => setToast({ open: true, type: type });
 
   const handleClose = () => setAddModal(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "attention") {
       setAttention((prev) => !prev);
     } else {
-      name === "message" ? setMessage(value) : setTech(value);
+      name === "message" ? setMessage(value) : setTechSelected(value);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (message === "" || tech === "") {
+    if (message === "" || techSelected === "") {
       openToast("error");
     } else {
       const newLog = {
         message,
         attention,
-        tech,
+        techSelected,
         date: new Date(),
       };
 
@@ -94,7 +80,7 @@ const AddLogModal = ({ setAddModal, addModal, addLog }) => {
       // Clear fields
       setMessage("");
       setAttention(false);
-      setTech("");
+      setTechSelected("");
     }
   };
 
@@ -138,22 +124,10 @@ const AddLogModal = ({ setAddModal, addModal, addLog }) => {
                 required
               />
             </Box>
-            <TextField
-              select
-              label="Select tech"
-              name="tech"
-              size="small"
-              value={tech}
-              onChange={handleChange}
-              sx={{ width: 200 }}
-              required
-            >
-              {techs.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.value}
-                </MenuItem>
-              ))}
-            </TextField>
+            <TechSelectOptions
+              techSelected={techSelected}
+              handleChange={handleChange}
+            />
             <FormControlLabel
               label="Needs attention"
               control={

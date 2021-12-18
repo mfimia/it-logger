@@ -13,7 +13,7 @@ import Snackbar from "@mui/material/Snackbar";
 import EditLogModal from "../modals/logs/EditLogModal";
 
 const LogItem = ({ log, deleteLog, setCurrent }) => {
-  const { message, tech, date, attention, id } = log;
+  const { message, techSelected, date, attention, id } = log;
 
   const [toast, setToast] = useState({
     open: false,
@@ -63,7 +63,7 @@ const LogItem = ({ log, deleteLog, setCurrent }) => {
           }
           secondary={
             <Typography sx={{ fontSize: 14 }} color="text.secondary">
-              ID #{id} last updated by {tech} on {date}
+              ID #{id} last updated by {techSelected} on {date}
             </Typography>
           }
         />
