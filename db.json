@@ -1,25 +1,11 @@
 {
   "logs": [
     {
-      "id": 2,
-      "message": "sdafas",
+      "message": "test",
       "attention": false,
-      "techSelected": "Tech 4 lastName",
-      "date": "2021-12-18T16:34:32.204Z"
-    },
-    {
-      "id": 3,
-      "message": "aaa",
-      "attention": false,
-      "techSelected": "Tech 1 lastName",
-      "date": "2021-12-18T16:34:25.835Z"
-    },
-    {
-      "message": "works",
-      "attention": false,
-      "techSelected": "Tech 3 lastName",
-      "date": "2021-12-19T14:06:01.524Z",
-      "id": 4
+      "techSelected": "Tech 2 lastName",
+      "date": "2021-12-19T14:56:48.229Z",
+      "id": 1
     }
   ],
   "techs": [
