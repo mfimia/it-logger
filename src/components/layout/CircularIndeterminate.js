@@ -12,7 +12,6 @@ export default function CircularIndeterminate() {
         left: "50%",
         transform: "translate(-50%, -50%)",
       }}
-      sx={{ border: 1 }}
     >
       <CircularProgress />
     </Box>
