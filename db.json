@@ -1,13 +1,6 @@
 {
   "logs": [
     {
-      "message": "something",
-      "attention": true,
-      "techSelected": "Tech 2 lastName",
-      "date": "2021-12-18T16:22:22.365Z",
-      "id": 1
-    },
-    {
       "id": 2,
       "message": "sdafas",
       "attention": false,
@@ -20,6 +13,13 @@
       "attention": false,
       "techSelected": "Tech 1 lastName",
       "date": "2021-12-18T16:34:25.835Z"
+    },
+    {
+      "message": "works",
+      "attention": false,
+      "techSelected": "Tech 3 lastName",
+      "date": "2021-12-19T14:06:01.524Z",
+      "id": 4
     }
   ],
   "techs": [
