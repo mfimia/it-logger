@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getTechs } from "../../../actions/techActions";
@@ -25,7 +25,7 @@ const TechListModal = ({ techModal, setTechModal, getTechs, tech }) => {
   const { techs, loading } = tech;
   useEffect(() => {
     getTechs();
-    // eslint-disble-next-line
+    // eslint-disable-next-line
   }, []);
 
   const handleClose = () => setTechModal(false);
