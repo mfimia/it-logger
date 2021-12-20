@@ -1,32 +1,11 @@
 {
   "logs": [
     {
-      "message": "test",
+      "message": "dfgsdafsdf",
       "attention": false,
       "techSelected": "Tech 2 lastName",
-      "date": "2021-12-19T14:56:48.229Z",
+      "date": "2021-12-20T20:01:49.294Z",
       "id": 1
-    },
-    {
-      "message": "sdkjfhsdlak",
-      "attention": false,
-      "techSelected": "Tech 3 lastName",
-      "date": "2021-12-19T15:01:34.994Z",
-      "id": 2
-    },
-    {
-      "message": "kfdsjsd",
-      "attention": false,
-      "techSelected": "Tech 1 lastName",
-      "date": "2021-12-19T15:01:42.526Z",
-      "id": 3
-    },
-    {
-      "message": "sdklfjsd",
-      "attention": false,
-      "techSelected": "Tech 4 lastName",
-      "date": "2021-12-19T15:01:50.628Z",
-      "id": 4
     }
   ],
   "techs": [

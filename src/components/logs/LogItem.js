@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { deleteLog, setCurrent } from "../../actions/logActions";
+import { setAlert, clearAlert } from "../../actions/alertActions";
 import PropTypes from "prop-types";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -12,19 +13,23 @@ import { Fragment, useState } from "react";
 import Snackbar from "@mui/material/Snackbar";
 import EditLogModal from "../modals/logs/EditLogModal";
 
-const LogItem = ({ log, deleteLog, setCurrent }) => {
+const LogItem = ({
+  log,
+  deleteLog,
+  setCurrent,
+  setAlert,
+  clearAlert,
+  alert,
+}) => {
   const { message, techSelected, date, attention, id } = log;
+  const { msg, type } = alert;
 
-  const [toast, setToast] = useState({
-    open: false,
-    type: null,
-  });
-
+  console.log(alert);
   const [editModal, setEditModal] = useState(false);
 
   const handleDelete = () => {
     deleteLog(id);
-    openToast("success");
+    setAlert("Log deleted", "success", true);
   };
 
   const handleClick = () => {
@@ -33,14 +38,8 @@ const LogItem = ({ log, deleteLog, setCurrent }) => {
   };
 
   const closeToast = () => {
-    setToast((prev) => {
-      return {
-        ...prev,
-        open: false,
-      };
-    });
+    clearAlert();
   };
-  const openToast = (type) => setToast({ open: true, type: type });
 
   return (
     <Fragment>
@@ -74,16 +73,12 @@ const LogItem = ({ log, deleteLog, setCurrent }) => {
 
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={toast.open}
-        autoHideDuration={6000}
+        open={msg !== ""}
+        autoHideDuration={3000}
         onClose={closeToast}
       >
-        <Alert
-          onClose={closeToast}
-          severity={toast.type}
-          sx={{ width: "100%" }}
-        >
-          Log deleted
+        <Alert onClose={closeToast} severity={type} sx={{ width: "100%" }}>
+          {msg}
         </Alert>
       </Snackbar>
       {editModal && (
@@ -99,4 +94,13 @@ LogItem.propTypes = {
   setCurrent: PropTypes.func.isRequired,
 };
 
-export default connect(null, { deleteLog, setCurrent })(LogItem);
+const mapStateToProps = (state) => ({
+  alert: state.alert,
+});
+
+export default connect(mapStateToProps, {
+  deleteLog,
+  setCurrent,
+  setAlert,
+  clearAlert,
+})(LogItem);
