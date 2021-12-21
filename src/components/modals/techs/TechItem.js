@@ -1,4 +1,8 @@
 import PropTypes from "prop-types";
+import { Fragment } from "react";
+import { connect } from "react-redux";
+import { deleteTech } from "../../../actions/techActions";
+import { setAlert } from "../../../actions/alertActions";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
@@ -6,10 +10,14 @@ import Avatar from "@mui/material/Avatar";
 import FolderIcon from "@mui/icons-material/Folder";
 import { Typography, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Fragment } from "react";
 
-const TechItem = ({ tech }) => {
-  const { firstName, lastName } = tech;
+const TechItem = ({ tech, deleteTech, setAlert }) => {
+  const { firstName, lastName, id } = tech;
+
+  const handleClick = () => {
+    deleteTech(id);
+    setAlert("Tech deleted", "success");
+  };
 
   return (
     <Fragment>
@@ -26,7 +34,7 @@ const TechItem = ({ tech }) => {
             </Typography>
           }
         />
-        <IconButton aria-label="delete">
+        <IconButton aria-label="delete" onClick={handleClick}>
           <DeleteIcon />
         </IconButton>
       </ListItem>
@@ -36,6 +44,8 @@ const TechItem = ({ tech }) => {
 
 TechItem.propTypes = {
   tech: PropTypes.object.isRequired,
+  deleteTech: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
-export default TechItem;
+export default connect(null, { deleteTech, setAlert })(TechItem);

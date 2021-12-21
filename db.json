@@ -1,48 +1,35 @@
 {
   "logs": [
     {
-      "message": "asdfsd",
+      "id": 1,
+      "message": "example log. doesn't need attention",
       "attention": false,
-      "techSelected": "Tech 4 lastName",
-      "date": "2021-12-21T15:48:48.955Z",
-      "id": 1
+      "techSelected": "John  Doe",
+      "date": "2021-12-21T16:07:58.345Z"
+    },
+    {
+      "message": "Urgent log. needs attention",
+      "attention": true,
+      "techSelected": "foo bar",
+      "date": "2021-12-21T16:07:50.321Z",
+      "id": 2
     }
   ],
   "techs": [
     {
-      "id": 1,
-      "firstName": "Tech 1",
-      "lastName": "lastName"
+      "firstName": "John ",
+      "lastName": "Doe",
+      "id": 1
     },
     {
-      "id": 2,
-      "firstName": "Tech 2",
-      "lastName": "lastName"
+      "firstName": "foo",
+      "lastName": "bar",
+      "id": 2
     },
     {
-      "id": 3,
-      "firstName": "Tech 3",
-      "lastName": "lastName"
-    },
-    {
-      "firstName": "Tech 4",
-      "lastName": "lastName",
-      "id": 4
-    },
-    {
-      "firstName": "compa",
-      "lastName": "compaps",
-      "id": 5
-    },
-    {
-      "firstName": "d",
-      "lastName": "d",
-      "id": 6
-    },
-    {
-      "firstName": "sd",
-      "lastName": "fads",
-      "id": 7
+      "firstName": "someone",
+      "lastName": "example",
+      "id": 3
     }
   ]
 }
