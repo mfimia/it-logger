@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 // Importing action from redux
 import { addLog } from "../../../actions/logActions";
+import { setAlert } from "../../../actions/alertActions";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -13,8 +14,6 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import SendIcon from "@mui/icons-material/Send";
 import { Button } from "@mui/material";
-import Snackbar from "@mui/material/Snackbar";
-import { Alert } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -29,26 +28,11 @@ const style = {
   p: 4,
 };
 
-const AddLogModal = ({ setAddModal, addModal, addLog }) => {
+const AddLogModal = ({ setAddModal, addModal, addLog, setAlert }) => {
   // It's a form, so we will have always our component-level state
   const [message, setMessage] = useState("");
   const [attention, setAttention] = useState(false);
   const [techSelected, setTechSelected] = useState("");
-
-  const [toast, setToast] = useState({
-    open: false,
-    type: null,
-  });
-
-  const closeToast = () => {
-    setToast((prev) => {
-      return {
-        ...prev,
-        open: false,
-      };
-    });
-  };
-  const openToast = (type) => setToast({ open: true, type: type });
 
   const handleClose = () => setAddModal(false);
 
@@ -64,7 +48,7 @@ const AddLogModal = ({ setAddModal, addModal, addLog }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (message === "" || techSelected === "") {
-      openToast("error");
+      setAlert("Please fill all fields!", "error");
     } else {
       const newLog = {
         message,
@@ -75,7 +59,7 @@ const AddLogModal = ({ setAddModal, addModal, addLog }) => {
 
       // Add log and display toast
       addLog(newLog);
-      openToast("success");
+      setAlert("Log added", "success");
 
       // Clear fields
       setMessage("");
@@ -144,20 +128,6 @@ const AddLogModal = ({ setAddModal, addModal, addLog }) => {
           </Box>
         </Box>
       </Modal>
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={toast.open}
-        autoHideDuration={6000}
-        onClose={closeToast}
-      >
-        <Alert
-          onClose={closeToast}
-          severity={toast.type}
-          sx={{ width: "100%" }}
-        >
-          {toast.type === "success" ? "Log added" : "Please fill all fields!"}
-        </Alert>
-      </Snackbar>
     </Fragment>
   );
 };
@@ -167,4 +137,4 @@ AddLogModal.propTypes = {
 };
 
 // We are not adding state, jsut an action. So we just call null first and then the action
-export default connect(null, { addLog })(AddLogModal);
+export default connect(null, { addLog, setAlert })(AddLogModal);

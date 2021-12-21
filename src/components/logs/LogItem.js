@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
-import { setAlert, clearAlert } from "../../actions/alertActions";
+import { setAlert } from "../../actions/alertActions";
 import { deleteLog, setCurrent } from "../../actions/logActions";
+import { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -9,8 +10,6 @@ import Avatar from "@mui/material/Avatar";
 import FolderIcon from "@mui/icons-material/Folder";
 import { Link, Typography, IconButton, Alert } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Fragment, useState } from "react";
-import Snackbar from "@mui/material/Snackbar";
 import EditLogModal from "../modals/logs/EditLogModal";
 
 const LogItem = ({ log, deleteLog, setCurrent, setAlert }) => {

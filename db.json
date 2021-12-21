@@ -1,5 +1,13 @@
 {
-  "logs": [],
+  "logs": [
+    {
+      "id": 1,
+      "message": "sdfsdfsfad",
+      "attention": true,
+      "techSelected": "Tech 4 lastName",
+      "date": "2021-12-21T12:47:35.746Z"
+    }
+  ],
   "techs": [
     {
       "id": 1,

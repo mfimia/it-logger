@@ -1,5 +1,6 @@
 import { useState, Fragment, useEffect } from "react";
 import { connect } from "react-redux";
+import { setAlert } from "../../../actions/alertActions";
 import PropTypes from "prop-types";
 import { updateLog } from "../../../actions/logActions";
 import Box from "@mui/material/Box";
@@ -10,8 +11,6 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import SendIcon from "@mui/icons-material/Send";
 import { Button } from "@mui/material";
-import Snackbar from "@mui/material/Snackbar";
-import { Alert } from "@mui/material";
 import TechSelectOptions from "../techs/TechSelectOptions";
 
 const style = {
@@ -27,7 +26,13 @@ const style = {
   p: 4,
 };
 
-const EditLogModal = ({ setEditModal, editModal, updateLog, current }) => {
+const EditLogModal = ({
+  setEditModal,
+  editModal,
+  updateLog,
+  current,
+  setAlert,
+}) => {
   const [message, setMessage] = useState("");
   const [attention, setAttention] = useState(false);
   const [techSelected, setTechSelected] = useState("");
@@ -40,21 +45,6 @@ const EditLogModal = ({ setEditModal, editModal, updateLog, current }) => {
     }
     // eslint-disable-next-line
   }, []);
-
-  const [toast, setToast] = useState({
-    open: false,
-    type: null,
-  });
-
-  const closeToast = () => {
-    setToast((prev) => {
-      return {
-        ...prev,
-        open: false,
-      };
-    });
-  };
-  const openToast = (type) => setToast({ open: true, type: type });
 
   const handleClose = () => setEditModal(false);
 
@@ -70,7 +60,7 @@ const EditLogModal = ({ setEditModal, editModal, updateLog, current }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (message === "" || techSelected === "") {
-      openToast("error");
+      setAlert("Please update all fields!", "error");
     } else {
       const updLog = {
         id: current.id,
@@ -80,7 +70,7 @@ const EditLogModal = ({ setEditModal, editModal, updateLog, current }) => {
         date: new Date(),
       };
       updateLog(updLog);
-      openToast("success");
+      setAlert("Log updated", "success");
     }
 
     // Clear fields
@@ -149,20 +139,6 @@ const EditLogModal = ({ setEditModal, editModal, updateLog, current }) => {
           </Box>
         </Box>
       </Modal>
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={toast.open}
-        autoHideDuration={6000}
-        onClose={closeToast}
-      >
-        <Alert
-          onClose={closeToast}
-          severity={toast.type}
-          sx={{ width: "100%" }}
-        >
-          {toast.type === "success" ? "Log updated" : "Please fill all fields!"}
-        </Alert>
-      </Snackbar>
     </Fragment>
   );
 };
@@ -176,4 +152,4 @@ const mapStateToProps = (state) => ({
   current: state.log.current,
 });
 
-export default connect(mapStateToProps, { updateLog })(EditLogModal);
+export default connect(mapStateToProps, { updateLog, setAlert })(EditLogModal);

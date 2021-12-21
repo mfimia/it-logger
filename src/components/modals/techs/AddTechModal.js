@@ -4,8 +4,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
-import Snackbar from "@mui/material/Snackbar";
-import { Alert } from "@mui/material";
+import { connect } from "react-redux";
+import { setAlert } from "../../../actions/alertActions";
 
 const style = {
   position: "absolute",
@@ -20,13 +20,9 @@ const style = {
   p: 4,
 };
 
-const AddTechModal = ({ setAddTech, addTech }) => {
+const AddTechModal = ({ setAddTech, addTech, setAlert }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-
-  const [toast, setToast] = useState(false);
-  const closeToast = () => setToast(false);
-  const openToast = () => setToast(true);
 
   const handleClose = () => setAddTech(false);
   const handleChange = (e) => {
@@ -37,7 +33,7 @@ const AddTechModal = ({ setAddTech, addTech }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (firstName === "" || lastName === "") {
-      openToast();
+      setAlert("Please enter full name!", "error");
     } else {
       console.log(firstName, lastName);
     }
@@ -97,18 +93,8 @@ const AddTechModal = ({ setAddTech, addTech }) => {
           </Box>
         </Box>
       </Modal>
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={toast}
-        autoHideDuration={6000}
-        onClose={closeToast}
-      >
-        <Alert onClose={closeToast} severity="error" sx={{ width: "100%" }}>
-          Please enter full name!
-        </Alert>
-      </Snackbar>
     </Fragment>
   );
 };
 
-export default AddTechModal;
+export default connect(null, { setAlert })(AddTechModal);
