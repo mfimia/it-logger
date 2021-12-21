@@ -2,7 +2,7 @@ import { SET_ALERT, REMOVE_ALERT } from "../actions/types";
 
 const initialState = {
   msg: "",
-  type: null,
+  type: "",
 };
 
 // eslint-disable-next-line
@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         msg: "",
-        type: null,
+        type: "",
       };
     default:
       return state;

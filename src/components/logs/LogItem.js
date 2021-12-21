@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import { deleteLog, setCurrent } from "../../actions/logActions";
 import { setAlert, clearAlert } from "../../actions/alertActions";
+import { deleteLog, setCurrent } from "../../actions/logActions";
 import PropTypes from "prop-types";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -13,32 +13,19 @@ import { Fragment, useState } from "react";
 import Snackbar from "@mui/material/Snackbar";
 import EditLogModal from "../modals/logs/EditLogModal";
 
-const LogItem = ({
-  log,
-  deleteLog,
-  setCurrent,
-  setAlert,
-  clearAlert,
-  alert,
-}) => {
+const LogItem = ({ log, deleteLog, setCurrent, setAlert }) => {
   const { message, techSelected, date, attention, id } = log;
-  const { msg, type } = alert;
 
-  console.log(alert);
   const [editModal, setEditModal] = useState(false);
 
   const handleDelete = () => {
     deleteLog(id);
-    setAlert("Log deleted", "success", true);
+    setAlert("Log deleted", "success");
   };
 
   const handleClick = () => {
     setCurrent(log);
     setEditModal(true);
-  };
-
-  const closeToast = () => {
-    clearAlert();
   };
 
   return (
@@ -70,17 +57,6 @@ const LogItem = ({
           <DeleteIcon />
         </IconButton>
       </ListItem>
-
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={msg !== ""}
-        autoHideDuration={3000}
-        onClose={closeToast}
-      >
-        <Alert onClose={closeToast} severity={type} sx={{ width: "100%" }}>
-          {msg}
-        </Alert>
-      </Snackbar>
       {editModal && (
         <EditLogModal editModal={editModal} setEditModal={setEditModal} />
       )}
@@ -94,13 +70,8 @@ LogItem.propTypes = {
   setCurrent: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  alert: state.alert,
-});
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   deleteLog,
   setCurrent,
   setAlert,
-  clearAlert,
 })(LogItem);
