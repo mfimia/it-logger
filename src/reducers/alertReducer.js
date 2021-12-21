@@ -2,7 +2,8 @@ import { SET_ALERT, REMOVE_ALERT } from "../actions/types";
 
 const initialState = {
   msg: "",
-  type: "",
+  type: "info",
+  open: false,
 };
 
 // eslint-disable-next-line
@@ -11,14 +12,14 @@ export default (state = initialState, action) => {
     case SET_ALERT:
       return {
         ...state,
+        open: true,
         msg: action.payload.msg,
         type: action.payload.type,
       };
     case REMOVE_ALERT:
       return {
         ...state,
-        msg: "",
-        type: "",
+        open: false,
       };
     default:
       return state;

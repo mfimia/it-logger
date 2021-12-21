@@ -16,7 +16,7 @@ import { Alert } from "@mui/material";
 const Logs = ({ log, getLogs, clearAlert, alert }) => {
   // We just take the logs and loading properties
   const { logs, loading } = log;
-  const { msg, type } = alert;
+  const { msg, type, open } = alert;
 
   const closeToast = () => clearAlert();
 
@@ -32,7 +32,7 @@ const Logs = ({ log, getLogs, clearAlert, alert }) => {
     <Fragment>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={msg !== "" && type !== ""}
+        open={open}
         autoHideDuration={3000}
         onClose={closeToast}
       >
