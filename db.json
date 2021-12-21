@@ -1,11 +1,11 @@
 {
   "logs": [
     {
-      "id": 1,
-      "message": "sdfsdfsfad",
-      "attention": true,
+      "message": "asdfsd",
+      "attention": false,
       "techSelected": "Tech 4 lastName",
-      "date": "2021-12-21T12:47:35.746Z"
+      "date": "2021-12-21T15:48:48.955Z",
+      "id": 1
     }
   ],
   "techs": [
@@ -28,6 +28,21 @@
       "firstName": "Tech 4",
       "lastName": "lastName",
       "id": 4
+    },
+    {
+      "firstName": "compa",
+      "lastName": "compaps",
+      "id": 5
+    },
+    {
+      "firstName": "d",
+      "lastName": "d",
+      "id": 6
+    },
+    {
+      "firstName": "sd",
+      "lastName": "fads",
+      "id": 7
     }
   ]
 }

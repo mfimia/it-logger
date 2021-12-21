@@ -14,7 +14,7 @@ export default function BasicSpeedDial() {
 
   const [addModal, setAddModal] = useState(false);
   const [techModal, setTechModal] = useState(false);
-  const [addTech, setAddTech] = useState(false);
+  const [addTechItem, setAddTechItem] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -28,7 +28,7 @@ export default function BasicSpeedDial() {
     {
       icon: <PersonAddIcon color="success" />,
       name: "Add Tech",
-      click: () => setAddTech(true),
+      click: () => setAddTechItem(true),
     },
     {
       icon: <AddBoxIcon color="secondary" />,
@@ -60,7 +60,12 @@ export default function BasicSpeedDial() {
       {addModal && (
         <AddLogModal addModal={addModal} setAddModal={setAddModal} />
       )}
-      {addTech && <AddTechModal addTech={addTech} setAddTech={setAddTech} />}
+      {addTechItem && (
+        <AddTechModal
+          addTechItem={addTechItem}
+          setAddTechItem={setAddTechItem}
+        />
+      )}
       {techModal && (
         <TechListModal techModal={techModal} setTechModal={setTechModal} />
       )}

@@ -1,4 +1,5 @@
 import { useState, Fragment } from "react";
+import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -6,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { connect } from "react-redux";
 import { setAlert } from "../../../actions/alertActions";
+import { addTech } from "../../../actions/techActions";
 
 const style = {
   position: "absolute",
@@ -20,11 +22,11 @@ const style = {
   p: 4,
 };
 
-const AddTechModal = ({ setAddTech, addTech, setAlert }) => {
+const AddTechModal = ({ setAddTechItem, addTechItem, setAlert, addTech }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const handleClose = () => setAddTech(false);
+  const handleClose = () => setAddTechItem(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     name === "firstName" ? setFirstName(value) : setLastName(value);
@@ -35,9 +37,12 @@ const AddTechModal = ({ setAddTech, addTech, setAlert }) => {
     if (firstName === "" || lastName === "") {
       setAlert("Please enter full name!", "error");
     } else {
-      console.log(firstName, lastName);
+      addTech({
+        firstName,
+        lastName,
+      });
     }
-
+    setAlert("Tech added", "success");
     // Clear fields
     setFirstName("");
     setLastName("");
@@ -46,7 +51,7 @@ const AddTechModal = ({ setAddTech, addTech, setAlert }) => {
   return (
     <Fragment>
       <Modal
-        open={addTech}
+        open={addTechItem}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -97,4 +102,9 @@ const AddTechModal = ({ setAddTech, addTech, setAlert }) => {
   );
 };
 
-export default connect(null, { setAlert })(AddTechModal);
+AddTechModal.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  addTech: PropTypes.func.isRequired,
+};
+
+export default connect(null, { setAlert, addTech })(AddTechModal);
