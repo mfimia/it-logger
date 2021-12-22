@@ -8,6 +8,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import IconButton from "@mui/material/IconButton";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -51,7 +54,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const SearchAppBar = ({ searchLogs }) => {
+const SearchAppBar = ({ searchLogs, mode, toggleTheme }) => {
   const handleChange = (e) => searchLogs(e.target.value);
 
   return (
@@ -66,6 +69,9 @@ const SearchAppBar = ({ searchLogs }) => {
           >
             IT LOGGER
           </Typography>
+          <IconButton sx={{ ml: 2 }} onClick={toggleTheme} color="inherit">
+            {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+          </IconButton>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
