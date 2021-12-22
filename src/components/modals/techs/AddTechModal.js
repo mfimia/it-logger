@@ -73,6 +73,7 @@ const AddTechModal = ({ setAddTechItem, addTechItem, setAlert, addTech }) => {
               alignItems: "center",
               justifyContent: "space-evenly",
             }}
+            autoComplete="false"
             onSubmit={handleSubmit}
           >
             <TextField
@@ -82,6 +83,7 @@ const AddTechModal = ({ setAddTechItem, addTechItem, setAlert, addTech }) => {
               name="firstName"
               value={firstName}
               required
+              sx={{ my: 2 }}
             />
             <TextField
               onChange={handleChange}
@@ -90,9 +92,10 @@ const AddTechModal = ({ setAddTechItem, addTechItem, setAlert, addTech }) => {
               name="lastName"
               value={lastName}
               required
+              sx={{ my: 2 }}
             />
 
-            <Button onClick={handleSubmit} variant="contained">
+            <Button sx={{ mt: 4 }} onClick={handleSubmit} variant="contained">
               Submit
             </Button>
           </Box>
