@@ -92,6 +92,7 @@ const AddLogModal = ({ setAddModal, addModal, addLog, setAlert }) => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "space-evenly",
+              mt: 2,
             }}
             onSubmit={handleSubmit}
           >
@@ -119,6 +120,7 @@ const AddLogModal = ({ setAddModal, addModal, addLog, setAlert }) => {
                   name="attention"
                   checked={attention}
                   onChange={handleChange}
+                  sx={{ my: 4 }}
                 />
               }
             />
