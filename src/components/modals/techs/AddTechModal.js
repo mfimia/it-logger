@@ -41,11 +41,11 @@ const AddTechModal = ({ setAddTechItem, addTechItem, setAlert, addTech }) => {
         firstName,
         lastName,
       });
+      setAlert("Tech added", "success");
+      // Clear fields
+      setFirstName("");
+      setLastName("");
     }
-    setAlert("Tech added", "success");
-    // Clear fields
-    setFirstName("");
-    setLastName("");
   };
 
   return (
