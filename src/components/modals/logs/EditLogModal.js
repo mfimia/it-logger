@@ -103,6 +103,7 @@ const EditLogModal = ({
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "space-evenly",
+              mt: 2,
             }}
             onSubmit={handleSubmit}
           >
@@ -130,6 +131,7 @@ const EditLogModal = ({
                   name="attention"
                   checked={attention}
                   onChange={handleChange}
+                  sx={{ my: 4 }}
                 />
               }
             />
