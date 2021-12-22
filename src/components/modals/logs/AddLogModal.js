@@ -96,7 +96,7 @@ const AddLogModal = ({ setAddModal, addModal, addLog, setAlert }) => {
             }}
             onSubmit={handleSubmit}
           >
-            <Box sx={{ display: "flex", alignItems: "center", mb: 8 }}>
+            <Box sx={{ display: "flex", alignItems: "center", mb: 4 }}>
               <SendIcon
                 sx={{ color: "action.active", mr: 2, my: 0.5, pt: 3 }}
               />

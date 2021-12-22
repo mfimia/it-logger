@@ -6,11 +6,10 @@ import PropTypes from "prop-types";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
-import Avatar from "@mui/material/Avatar";
-import FolderIcon from "@mui/icons-material/Folder";
 import { Link, Typography, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditLogModal from "../modals/logs/EditLogModal";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 const LogItem = ({ log, deleteLog, setCurrent, setAlert }) => {
   const { message, techSelected, date, attention, id } = log;
@@ -31,9 +30,7 @@ const LogItem = ({ log, deleteLog, setCurrent, setAlert }) => {
     <Fragment>
       <ListItem sx={{ width: "50%", mx: "auto" }}>
         <ListItemAvatar>
-          <Avatar>
-            <FolderIcon />
-          </Avatar>
+          <ErrorOutlineIcon fontSize="large" />
         </ListItemAvatar>
         <ListItemText
           primary={

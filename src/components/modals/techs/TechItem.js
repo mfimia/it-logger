@@ -6,10 +6,9 @@ import { setAlert } from "../../../actions/alertActions";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
-import Avatar from "@mui/material/Avatar";
-import FolderIcon from "@mui/icons-material/Folder";
 import { Typography, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 
 const TechItem = ({ tech, deleteTech, setAlert }) => {
   const { firstName, lastName, id } = tech;
@@ -21,11 +20,9 @@ const TechItem = ({ tech, deleteTech, setAlert }) => {
 
   return (
     <Fragment>
-      <ListItem>
+      <ListItem sx={{ width: "60%", margin: "auto" }}>
         <ListItemAvatar>
-          <Avatar>
-            <FolderIcon />
-          </Avatar>
+          <AssignmentIndIcon fontSize="large" />
         </ListItemAvatar>
         <ListItemText
           primary={

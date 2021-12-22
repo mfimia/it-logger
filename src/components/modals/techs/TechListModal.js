@@ -46,7 +46,7 @@ const TechListModal = ({ techModal, setTechModal, getTechs, tech }) => {
         >
           Technician List
         </Typography>
-        <List>
+        <List sx={{ mt: 4 }}>
           {!loading &&
             techs !== null &&
             techs.map((tech) => <TechItem key={tech.id} tech={tech} />)}
