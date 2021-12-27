@@ -2,17 +2,17 @@
   "logs": [
     {
       "id": 1,
-      "message": "example log. doesn't need attention",
+      "message": "Example log. Doesn't need attention",
       "attention": false,
       "techSelected": "John  Doe",
-      "date": "2021-12-21T16:07:58.345Z"
+      "date": "2021-12-27T06:45:52.149Z"
     },
     {
-      "message": "urgent log",
+      "id": 2,
+      "message": "Some log",
       "attention": true,
-      "techSelected": "someone example",
-      "date": "2021-12-22T08:15:09.403Z",
-      "id": 2
+      "techSelected": "John  Doe",
+      "date": "2021-12-27T06:45:36.364Z"
     }
   ],
   "techs": [
