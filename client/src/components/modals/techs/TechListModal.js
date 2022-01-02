@@ -23,6 +23,7 @@ const style = {
 
 const TechListModal = ({ techModal, setTechModal, getTechs, tech }) => {
   const { techs, loading } = tech;
+
   useEffect(() => {
     getTechs();
     // eslint-disable-next-line
