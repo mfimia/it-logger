@@ -63,7 +63,7 @@ const EditLogModal = ({
       setAlert("Please update all fields!", "error");
     } else {
       const updLog = {
-        id: current.id,
+        _id: current._id,
         message,
         attention,
         techSelected,
