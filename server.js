@@ -1,14 +1,5 @@
-const { MongoClient } = require("mongodb");
 const express = require("express");
-const app = express();
 const path = require("path");
-const dotenv = require("dotenv");
-dotenv.config();
-
-const client = new MongoClient(process.env.REACT_APP_MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 
 const app = express();
 
