@@ -41,7 +41,7 @@ const Logs = ({ log, getLogs, clearAlert, alert }) => {
         </Alert>
       </Snackbar>
       <List>
-        {!loading && logs.length === 0 ? (
+        {!loading && (logs.length === 0 || !logs) ? (
           <Fragment>
             <Typography textAlign="center" variant="h4" component="h4">
               No logs to show
