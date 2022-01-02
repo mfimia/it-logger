@@ -62,7 +62,7 @@ const Logs = ({ log, getLogs, clearAlert, alert }) => {
             </Box>
           </Fragment>
         ) : (
-          logs.map((log) => <LogItem key={log.id} log={log} />)
+          logs.map((log) => <LogItem key={log._id} log={log} />)
         )}
       </List>
     </Fragment>
