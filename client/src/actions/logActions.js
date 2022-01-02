@@ -91,7 +91,12 @@ export const updateLog = (log) => async (dispatch) => {
 
     dispatch({
       type: UPDATE_LOG,
-      payload: data,
+      payload: data.sentLog,
+    });
+
+    dispatch({
+      type: GET_LOGS,
+      payload: data.logs,
     });
   } catch (err) {
     dispatch({
