@@ -11,7 +11,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  logs: null,
+  logs: [],
   current: null,
   loading: false,
   error: null,
@@ -35,14 +35,14 @@ export default (state = initialState, action) => {
     case DELETE_LOG:
       return {
         ...state,
-        logs: state.logs.filter((log) => log.id !== action.payload),
+        logs: state.logs.filter((log) => log._id !== action.payload),
         loading: false,
       };
     case UPDATE_LOG:
       return {
         ...state,
         logs: state.logs.map((log) =>
-          log.id === action.payload.id ? action.payload : log
+          log._id === action.payload.id ? action.payload : log
         ),
       };
     case SEARCH_LOGS:
