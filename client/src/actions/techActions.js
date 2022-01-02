@@ -51,17 +51,26 @@ export const addTech = (tech) => async (dispatch) => {
   }
 };
 
-// Get the techs. Async syntax.
+// Delete a tech. Async syntax.
 // Returns a function takes "dispatch" as paramenter
 export const deleteTech = (id) => async (dispatch) => {
   try {
     setLoading();
-    await fetch(`api/techs/${id}`, {
+    const res = await fetch(`api/techs/${id}`, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
     dispatch({
       type: DELETE_TECH,
       payload: id,
+    });
+    // When tech is deleted, we get the data and update the state
+    const data = await res.json();
+    dispatch({
+      type: GET_TECHS,
+      payload: data,
     });
   } catch (err) {
     dispatch({
