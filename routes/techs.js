@@ -1,4 +1,5 @@
 const { MongoClient } = require("mongodb");
+const ObjectId = require("mongodb").ObjectId;
 const express = require("express");
 const router = express.Router();
 const dotenv = require("dotenv");
@@ -18,8 +19,8 @@ router.get("/", async (req, res) => {
     client.connect(async () => {
       const db = client.db("ITLogger");
       const techs = await db.collection("Techs").find().toArray();
-      client.close();
       res.json(techs);
+      await client.close();
     });
   } catch (err) {
     console.error(err.message);
@@ -42,8 +43,27 @@ router.post("/", async (req, res) => {
     client.connect(async () => {
       const db = client.db("ITLogger");
       await db.collection("Techs").insertOne(newTech);
-      client.close();
       res.json(newTech);
+      await client.close();
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// This route will allow to delete a tech
+// @route   DELETE api/techs
+// desc     Delete Tech
+// @access  Private
+router.delete("/:id", async (req, res) => {
+  try {
+    client.connect(async () => {
+      const db = client.db("ITLogger");
+      await db.collection("Techs").deleteOne({ _id: ObjectId(req.params.id) });
+      const techs = await db.collection("Techs").find().toArray();
+      res.json(techs);
+      await client.close();
     });
   } catch (err) {
     console.error(err.message);
