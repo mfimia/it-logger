@@ -11,13 +11,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditLogModal from "../modals/logs/EditLogModal";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
-const LogItem = ({ log, deleteLog, setCurrent, setAlert }) => {
-  const { message, techSelected, date, attention, id } = log;
+const LogItem = ({ log, deleteLog, setCurrent, setAlert, index }) => {
+  const { message, techSelected, date, attention, _id } = log;
 
   const [editModal, setEditModal] = useState(false);
 
   const handleDelete = () => {
-    deleteLog(id);
+    deleteLog(_id);
     setAlert("Log deleted", "success");
   };
 
@@ -45,7 +45,7 @@ const LogItem = ({ log, deleteLog, setCurrent, setAlert }) => {
           }
           secondary={
             <Typography sx={{ fontSize: 14 }} color="text.secondary">
-              ID #{id} last updated by {techSelected} on {date}
+              ID #{index} last updated by {techSelected} on {date}
             </Typography>
           }
         />
