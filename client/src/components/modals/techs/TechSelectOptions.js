@@ -25,7 +25,7 @@ const TechSelectOptions = ({ getTechs, tech, handleChange, techSelected }) => {
         required
       >
         {techs.map((t) => (
-          <MenuItem key={t.id} value={`${t.firstName} ${t.lastName}`}>
+          <MenuItem key={t._id} value={`${t.firstName} ${t.lastName}`}>
             {t.firstName} {t.lastName}
           </MenuItem>
         ))}
