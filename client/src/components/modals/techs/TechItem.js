@@ -11,10 +11,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 
 const TechItem = ({ tech, deleteTech, setAlert }) => {
-  const { firstName, lastName, id } = tech;
+  const { firstName, lastName, _id } = tech;
 
   const handleClick = () => {
-    deleteTech(id);
+    deleteTech(_id);
     setAlert("Tech deleted", "success");
   };
 
@@ -42,6 +42,7 @@ const TechItem = ({ tech, deleteTech, setAlert }) => {
 TechItem.propTypes = {
   tech: PropTypes.object.isRequired,
   deleteTech: PropTypes.func.isRequired,
+  getTechs: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired,
 };
 
