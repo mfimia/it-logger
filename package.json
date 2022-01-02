@@ -24,7 +24,7 @@
     "build": "react-scripts build",
     "json-server": "npm run json-server --prefix client",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run client\" \"npm run json-server\"",
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
