@@ -49,7 +49,7 @@ const TechListModal = ({ techModal, setTechModal, getTechs, tech }) => {
         <List sx={{ mt: 4 }}>
           {!loading &&
             techs !== null &&
-            techs.map((tech) => <TechItem key={tech.id} tech={tech} />)}
+            techs.map((tech) => <TechItem key={tech._id} tech={tech} />)}
         </List>
       </Box>
     </Modal>
