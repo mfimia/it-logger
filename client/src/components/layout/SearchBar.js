@@ -1,7 +1,4 @@
 import { styled, alpha } from "@mui/material/styles";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { searchLogs } from "../../actions/logActions";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -54,13 +51,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const SearchAppBar = ({ searchLogs, mode, toggleTheme }) => {
-  const handleChange = (e) => {
-    if (e.keyCode === 13) {
-      searchLogs(e.target.value);
-      e.target.value = "";
-    }
-  };
+const SearchAppBar = ({ mode, toggleTheme, inputValue, setInputValue }) => {
+  const handleChange = (e) => setInputValue(e.target.value);
+
+  const handleSubmit = (e) => e.keyCode === 13 && setInputValue("");
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -84,7 +78,9 @@ const SearchAppBar = ({ searchLogs, mode, toggleTheme }) => {
             <StyledInputBase
               placeholder="Search logs…"
               inputProps={{ "aria-label": "search" }}
-              onKeyDown={handleChange}
+              onKeyDown={handleSubmit}
+              onChange={handleChange}
+              value={inputValue}
             />
           </Search>
         </Toolbar>
@@ -93,8 +89,4 @@ const SearchAppBar = ({ searchLogs, mode, toggleTheme }) => {
   );
 };
 
-SearchAppBar.propTypes = {
-  searchLogs: PropTypes.func.isRequired,
-};
-
-export default connect(null, { searchLogs })(SearchAppBar);
+export default SearchAppBar;
