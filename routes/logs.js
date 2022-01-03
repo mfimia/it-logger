@@ -15,16 +15,40 @@ const client = new MongoClient(process.env.REACT_APP_MONGO_URI, {
 // desc     Get top logs
 // @access  Private
 router.get("/", async (req, res) => {
-  try {
-    client.connect(async () => {
-      const db = client.db("ITLogger");
-      const logs = await db.collection("Logs").find().toArray();
-      res.json(logs);
-      await client.close();
-    });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+  if (req.query.q) {
+    try {
+      client.connect(async () => {
+        const db = client.db("ITLogger");
+        const logs = await db
+          .collection("Logs")
+          .find({
+            $or: [
+              { message: { $regex: req.query.q } },
+              { techSelected: { $regex: req.query.q } },
+              { date: { $regex: req.query.q } },
+            ],
+          })
+          .toArray();
+        console.log(logs);
+        res.json(logs);
+        await client.close();
+      });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  } else {
+    try {
+      client.connect(async () => {
+        const db = client.db("ITLogger");
+        const logs = await db.collection("Logs").find().toArray();
+        res.json(logs);
+        await client.close();
+      });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
   }
 });
 
