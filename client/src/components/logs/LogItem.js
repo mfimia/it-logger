@@ -28,7 +28,17 @@ const LogItem = ({ log, deleteLog, setCurrent, setAlert, index }) => {
 
   return (
     <Fragment>
-      <ListItem sx={{ width: "50%", mx: "auto" }}>
+      <ListItem
+        sx={{
+          width: {
+            xs: "80%",
+            sm: "70%",
+            md: "45%",
+            xl: "35%",
+          },
+          mx: "auto",
+        }}
+      >
         <ListItemAvatar>
           <ErrorOutlineIcon fontSize="large" />
         </ListItemAvatar>
