@@ -42,7 +42,6 @@ const TechItem = ({ tech, deleteTech, setAlert }) => {
 TechItem.propTypes = {
   tech: PropTypes.object.isRequired,
   deleteTech: PropTypes.func.isRequired,
-  getTechs: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired,
 };
 
