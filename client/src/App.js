@@ -10,6 +10,7 @@ import "./App.css";
 const App = () => {
   const darkPref = JSON.parse(localStorage.getItem("darkModePref-itLogger"));
   const [mode, setMode] = useState(darkPref || "light");
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     localStorage.setItem("darkModePref-itLogger", JSON.stringify(mode));
@@ -31,9 +32,14 @@ const App = () => {
     <Fragment>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <SearchBar mode={mode} toggleTheme={toggleTheme} />
+        <SearchBar
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          mode={mode}
+          toggleTheme={toggleTheme}
+        />
         <Box sx={{ flexGrow: 1, mt: 2 }}>
-          <Logs />
+          <Logs inputValue={inputValue} />
         </Box>
         <AddBtn />
       </ThemeProvider>
