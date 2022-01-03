@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import List from "@mui/material/List";
 import LogItem from "./LogItem";
 import CircularIndeterminate from "../layout/CircularIndeterminate";
@@ -13,10 +13,11 @@ import Snackbar from "@mui/material/Snackbar";
 import { Alert } from "@mui/material";
 
 // We destructure the props coming from redux (declared at the end of the component)
-const Logs = ({ log, getLogs, clearAlert, alert }) => {
+const Logs = ({ log, getLogs, clearAlert, alert, inputValue }) => {
   // We just take the logs and loading properties
   const { logs, loading } = log;
   const { msg, type, open } = alert;
+  const [filteredLogs, setFilteredLogs] = useState([]);
 
   const closeToast = () => clearAlert();
 
@@ -24,6 +25,21 @@ const Logs = ({ log, getLogs, clearAlert, alert }) => {
     getLogs();
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    console.log(inputValue);
+    if (inputValue === "") {
+      setFilteredLogs(logs);
+    } else {
+      setFilteredLogs(
+        logs.filter((l) => {
+          return ["message", "techSelected", "date"].some((key) => {
+            return l[key].includes(inputValue);
+          });
+        })
+      );
+    }
+  }, [inputValue, logs]);
 
   if (loading || logs === null || logs.length === 0) {
     return <CircularIndeterminate />;
@@ -62,7 +78,7 @@ const Logs = ({ log, getLogs, clearAlert, alert }) => {
             </Box>
           </Fragment>
         ) : (
-          logs.map((log, index) => (
+          filteredLogs.map((log, index) => (
             <LogItem index={index + 1} key={index} log={log} />
           ))
         )}
