@@ -25,7 +25,7 @@ const Logs = ({ log, getLogs, clearAlert, alert }) => {
     // eslint-disable-next-line
   }, []);
 
-  if (loading || logs === null) {
+  if (loading || logs === null || logs.length === 0) {
     return <CircularIndeterminate />;
   }
   return (
