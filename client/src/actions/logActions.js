@@ -5,7 +5,6 @@ import {
   ADD_LOG,
   UPDATE_LOG,
   DELETE_LOG,
-  SEARCH_LOGS,
   SET_CURRENT,
   CLEAR_CURRENT,
 } from "./types";
@@ -97,25 +96,6 @@ export const updateLog = (log) => async (dispatch) => {
     dispatch({
       type: GET_LOGS,
       payload: data.logs,
-    });
-  } catch (err) {
-    dispatch({
-      type: LOGS_ERROR,
-      payload: err,
-    });
-  }
-};
-
-// Search the logs. Async syntax. Returns a function
-export const searchLogs = (text) => async (dispatch) => {
-  try {
-    setLoading();
-    const res = await fetch(`api/logs?q=${text}`);
-    const data = await res.json();
-
-    dispatch({
-      type: SEARCH_LOGS,
-      payload: data,
     });
   } catch (err) {
     dispatch({
