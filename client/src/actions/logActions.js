@@ -134,7 +134,7 @@ export const setCurrent = (log) => {
 };
 
 // Clear current log
-export const clearCurrent = (log) => {
+export const clearCurrent = () => {
   return {
     type: CLEAR_CURRENT,
   };
