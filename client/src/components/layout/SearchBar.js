@@ -55,7 +55,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const SearchAppBar = ({ searchLogs, mode, toggleTheme }) => {
-  const handleChange = (e) => searchLogs(e.target.value);
+  const handleChange = (e) => {
+    if (e.keyCode === 13) {
+      searchLogs(e.target.value);
+      e.target.value = "";
+    }
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -79,7 +84,7 @@ const SearchAppBar = ({ searchLogs, mode, toggleTheme }) => {
             <StyledInputBase
               placeholder="Search logs…"
               inputProps={{ "aria-label": "search" }}
-              onChange={handleChange}
+              onKeyDown={handleChange}
             />
           </Search>
         </Toolbar>
