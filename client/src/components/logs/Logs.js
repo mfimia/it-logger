@@ -12,6 +12,23 @@ import Skeleton from "@mui/material/Skeleton";
 import Snackbar from "@mui/material/Snackbar";
 import { Alert } from "@mui/material";
 
+const styles = {
+  margin: { my: 1 },
+};
+
+const skeletons = [
+  { animation: false },
+  { animation: "wave" },
+  { animation: false },
+  { animation: "wave" },
+  { animation: false },
+  { animation: "wave" },
+];
+
+const placeholder = skeletons.map((s) => (
+  <Skeleton sx={styles.margin} animation={s.animation} />
+));
+
 // We destructure the props coming from redux (declared at the end of the component)
 const Logs = ({ log, getLogs, clearAlert, alert, inputValue }) => {
   // We just take the logs and loading properties
@@ -40,7 +57,7 @@ const Logs = ({ log, getLogs, clearAlert, alert, inputValue }) => {
     }
   }, [inputValue, logs]);
 
-  if (loading || logs === null || logs.length === 0) {
+  if (loading) {
     return <CircularIndeterminate />;
   }
   return (
@@ -68,12 +85,7 @@ const Logs = ({ log, getLogs, clearAlert, alert, inputValue }) => {
                 my: 2,
               }}
             >
-              <Skeleton sx={{ my: 1 }} />
-              <Skeleton sx={{ my: 1 }} animation="wave" />
-              <Skeleton sx={{ my: 1 }} animation={false} />
-              <Skeleton sx={{ my: 1 }} animation={false} />
-              <Skeleton sx={{ my: 1 }} animation="wave" />
-              <Skeleton sx={{ my: 1 }} />
+              {placeholder}
             </Box>
           </Fragment>
         ) : (
