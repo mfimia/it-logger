@@ -9,7 +9,6 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import SendIcon from "@mui/icons-material/Send";
 import { Button } from "@mui/material";
 import TechSelectOptions from "../techs/TechSelectOptions";
 
@@ -107,10 +106,7 @@ const EditLogModal = ({
             }}
             onSubmit={handleSubmit}
           >
-            <Box sx={{ display: "flex", alignItems: "center", mb: 4 }}>
-              <SendIcon
-                sx={{ color: "action.active", mr: 2, my: 0.5, pt: 3 }}
-              />
+            <Box sx={{ mb: 4 }}>
               <TextField
                 onChange={handleChange}
                 label="Log message"
