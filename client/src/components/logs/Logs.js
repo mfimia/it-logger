@@ -27,7 +27,6 @@ const Logs = ({ log, getLogs, clearAlert, alert, inputValue }) => {
   }, []);
 
   useEffect(() => {
-    console.log(inputValue);
     if (inputValue === "") {
       setFilteredLogs(logs);
     } else {

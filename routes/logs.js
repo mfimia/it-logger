@@ -18,17 +18,7 @@ router.get("/", async (req, res) => {
   try {
     client.connect(async () => {
       const db = client.db("ITLogger");
-      const logs = await db
-        .collection("Logs")
-        .find({
-          $or: [
-            { message: { $regex: req.query.q } },
-            { techSelected: { $regex: req.query.q } },
-            { date: { $regex: req.query.q } },
-          ],
-        })
-        .toArray();
-      console.log(logs);
+      const logs = await db.collection("Logs").find().toArray();
       res.json(logs);
       await client.close();
     });
